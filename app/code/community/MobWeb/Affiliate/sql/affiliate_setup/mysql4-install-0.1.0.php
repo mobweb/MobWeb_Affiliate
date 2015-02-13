@@ -20,6 +20,7 @@ $setup->addAttribute('customer', Mage::helper('affiliate')->customerReferrerAttr
 	'input' => 'text',
 	'label' => 'Referrer',
 	'global' => 1,
+	'required' => 0,
 	'default' => '',
 	'visible_on_front' => 0,
 ));
