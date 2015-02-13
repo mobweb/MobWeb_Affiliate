@@ -18,7 +18,14 @@ class MobWeb_Affiliate_Helper_Data extends Mage_Core_Helper_Abstract {
 		        ->addAttributeToSelect($this->customerReferrerAttributeCode);
 		$attributeValues = array_unique($collection->getColumnValues($this->customerReferrerAttributeCode));
 
+		// Sort the attribute values
 		sort($attributeValues, SORT_STRING);
+
+		// Add the values as keys
+		foreach($attributeValues AS $key => $value) {
+			unset($attributeValues[$key]);
+			$attributeValues[$value] = $value;
+		}
 
 		return $attributeValues;
 	}
@@ -32,8 +39,15 @@ class MobWeb_Affiliate_Helper_Data extends Mage_Core_Helper_Abstract {
 		        ->addAttributeToSelect($this->orderReferrerAttributeCode);
 		$attributeValues = array_unique($collection->getColumnValues($this->orderReferrerAttributeCode));
 
+		// Sort the attribute values
 		sort($attributeValues, SORT_STRING);
 
+		// Add the values as keys
+		foreach($attributeValues AS $key => $value) {
+			unset($attributeValues[$key]);
+			$attributeValues[$value] = $value;
+		}
+		
 		return $attributeValues;
 	}
 }
