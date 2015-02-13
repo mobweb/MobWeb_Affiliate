@@ -2,5 +2,9 @@ app/code/community/MobWeb/Affiliate app/code/community/MobWeb/Affiliate/
 
 app/etc/modules/MobWeb_Affiliate.xml app/etc/modules/MobWeb_Affiliate.xml
 
+app/locale/en_US/mobweb_affiliate.csv app/locale/en_US/mobweb_affiliate.csv
+app/locale/de_DE/mobweb_affiliate.csv app/locale/de_DE/mobweb_affiliate.csv
+app/locale/de_CH/mobweb_affiliate.csv app/locale/de_CH/mobweb_affiliate.csv
+
 # Clear the cache
 @shell   rm -rf $PROJECT/var/cache/* && echo "Magento Cache cleared"

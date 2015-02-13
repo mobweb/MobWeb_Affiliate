@@ -86,5 +86,14 @@
                 </observers>
             </sales_order_grid_collection_load_before>
         </events>
+        <translate>
+            <modules>
+                <affiliate>
+                    <files>
+                        <default>mobweb_affiliate.csv</default>
+                    </files>
+                </affiliate>
+            </modules>
+        </translate>
     </adminhtml>
 </config>
