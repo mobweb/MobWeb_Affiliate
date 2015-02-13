@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MobWeb_Affiliate>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends />
+        </MobWeb_Affiliate>
+    </modules>
+</config>

@@ -1,0 +1,6 @@
+app/code/community/MobWeb/Affiliate app/code/community/MobWeb/Affiliate/
+
+app/etc/modules/MobWeb_Affiliate.xml app/etc/modules/MobWeb_Affiliate.xml
+
+# Clear the cache
+@shell   rm -rf $PROJECT/var/cache/* && echo "Magento Cache cleared"

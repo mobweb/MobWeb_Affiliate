@@ -1,0 +1,90 @@
+<config>
+    <modules>
+        <MobWeb_Affiliate>
+            <version>0.1.0</version>
+        </MobWeb_Affiliate>
+    </modules>
+    <global>
+        <models>
+            <affiliate>
+                <class>MobWeb_Affiliate_Model</class>
+            </affiliate>
+        </models>
+        <helpers>
+            <affiliate>
+                <class>MobWeb_Affiliate_Helper</class>
+            </affiliate>
+        </helpers>
+        <resources>
+            <affiliate_setup>
+                <setup>
+                    <module>MobWeb_Affiliate</module>
+                    <class>Mage_Customer_Model_Entity_Setup</class>
+                </setup>
+            </affiliate_setup>
+        </resources>
+        <events>
+            <!-- Observe every page load in the frontend -->
+            <controller_front_init_before>
+                <observers>
+                    <affiliate>
+                        <class>affiliate/observer</class>
+                        <method>controllerFrontInitBefore</method>
+                        <type>singleton</type>
+                    </affiliate>
+                </observers>
+            </controller_front_init_before>
+            <!-- Observe user registration to check for a referrer -->
+            <customer_register_success>
+                <observers>
+                    <affiliate>
+                        <class>affiliate/observer</class>
+                        <method>customerRegisterSuccess</method>
+                        <type>singleton</type>
+                    </affiliate >
+                </observers>
+            </customer_register_success>
+            <!-- Observe order submission to check for a referrer -->
+            <sales_order_place_after>
+                <observers>
+                    <affiliate>
+                        <class>affiliate/observer</class>
+                        <method>captureOrder</method>
+                        <type>singleton</type>
+                    </affiliate>
+                </observers>
+            </sales_order_place_after>
+        </events>
+    </global>
+    <adminhtml>
+        <events>
+            <!-- Important: This event is used because it also includes the custom columns
+            in the exported CSV, see https://github.com/quafzi/magento-CustomerGridOrderCount/commit/534a5facbc9069d39221cc498c28ebfcb12a0ef2 -->
+            <core_layout_block_create_after>
+                <observers>
+                    <affiliate>
+                        <type>singleton</type>
+                        <class>affiliate/observer</class>
+                        <method>coreBlockAbstractToHtmlBefore</method>
+                    </affiliate>
+                </observers>
+            </core_layout_block_create_after>
+            <eav_collection_abstract_load_before>
+                <observers>
+                    <affiliate>
+                        <class>affiliate/observer</class>
+                        <method>eavCollectionAbstractLoadBefore</method>
+                    </affiliate>
+                </observers>
+            </eav_collection_abstract_load_before>
+            <sales_order_grid_collection_load_before>
+                <observers>
+                    <affiliate>
+                        <class>affiliate/observer</class>
+                        <method>eavCollectionAbstractLoadBefore</method>
+                    </affiliate>
+                </observers>
+            </sales_order_grid_collection_load_before>
+        </events>
+    </adminhtml>
+</config>
