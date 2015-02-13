@@ -41,7 +41,7 @@ class MobWeb_Affiliate_Model_Observer
         if($customer && $referrer = Mage::getModel('core/cookie')->get(Mage::helper('affiliate')->customerReferrerAttributeCode)) {
 
             // Update the newly registered customer's account the name of the referral
-            $customer->setData(Mage::helper('affiliate')->customerReferrerAttributeCode, $referrer);
+            $customer->setData(Mage::helper('affiliate')->customerReferrerAttributeCode, $referrer)->save();
 
             // And remove the cookie
             Mage::getModel('core/cookie')->delete(Mage::helper('affiliate')->customerReferrerAttributeCode);
