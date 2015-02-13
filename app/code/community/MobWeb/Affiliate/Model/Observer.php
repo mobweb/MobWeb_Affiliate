@@ -240,6 +240,41 @@ class MobWeb_Affiliate_Model_Observer
             // Group the collection rows by their ID, otherwise SUM() used above would aggregate all rows into one
             $collection->getSelect()->group('main_table.entity_id');
 
+            // Since we are inner joining the "orders" table, we have to
+            // specify which table to run the search queries against,
+            // otherwise the DB would throw an "ambigious" error
+            // See: http://stackoverflow.com/q/18147525/278840
+            $select = $collection->getSelect();
+            if ($where = $select->getPart('where')) {
+                foreach ($where as $key=> $condition) {
+                    if (strpos($condition, 'increment_id')) {
+                        $new_condition = str_replace("increment_id", "main_table.increment_id", $condition);
+                        $where[$key] = $new_condition;
+                    }
+                    if (strpos($condition, 'created_at')) {
+                        $new_condition = str_replace("created_at", "main_table.created_at", $condition);
+                        $where[$key] = $new_condition;
+                    }
+                    if (strpos($condition, 'store_id')) {
+                        $new_condition = str_replace("store_id", "main_table.store_id", $condition);
+                        $where[$key] = $new_condition;
+                    }
+                    if (strpos($condition, 'grand_total')) {
+                        $new_condition = str_replace("grand_total", "main_table.grand_total", $condition);
+                        $where[$key] = $new_condition;
+                    }
+                    if (strpos($condition, 'base_grand_total')) {
+                        $new_condition = str_replace("base_grand_total", "main_table.base_grand_total", $condition);
+                        $where[$key] = $new_condition;
+                    }
+                    if (strpos($condition, 'status')) {
+                        $new_condition = str_replace("status", "main_table.status", $condition);
+                        $where[$key] = $new_condition;
+                    }
+                }
+                $select->setPart('where', $where);
+            }
+
             return;
         }
     }
