@@ -233,12 +233,9 @@ class MobWeb_Affiliate_Model_Observer
 
                         // Referral amount = Total paid - Total refunded
                         // COALESCE() means "$v = $v ? $v : 0;", use 0 for the calculation if the value is NULL or empty
-                        'referral_amount' => 'SUM(COALESCE(orders.base_total_paid, 0) - COALESCE(orders.base_total_refunded, 0))' 
+                        'referral_amount' => '(COALESCE(orders.base_total_paid, 0) - COALESCE(orders.base_total_refunded, 0))' 
                     )
                 );
-
-            // Group the collection rows by their ID, otherwise SUM() used above would aggregate all rows into one
-            $collection->getSelect()->group('main_table.entity_id');
 
             // Since we are inner joining the "orders" table, we have to
             // specify which table to run the search queries against,
