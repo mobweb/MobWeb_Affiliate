@@ -245,27 +245,27 @@ class MobWeb_Affiliate_Model_Observer
             if ($where = $select->getPart('where')) {
                 foreach ($where as $key=> $condition) {
                     if (strpos($condition, 'increment_id')) {
-                        $new_condition = str_replace("increment_id", "main_table.increment_id", $condition);
+                        $new_condition = str_replace("`increment_id`", "`main_table`.increment_id", $condition);
                         $where[$key] = $new_condition;
                     }
                     if (strpos($condition, 'created_at')) {
-                        $new_condition = str_replace("created_at", "main_table.created_at", $condition);
+                        $new_condition = str_replace("`created_at`", "`main_table`.created_at", $condition);
                         $where[$key] = $new_condition;
                     }
                     if (strpos($condition, 'store_id')) {
-                        $new_condition = str_replace("store_id", "main_table.store_id", $condition);
+                        $new_condition = str_replace("`store_id`", "`main_table`.store_id", $condition);
                         $where[$key] = $new_condition;
                     }
                     if (strpos($condition, 'grand_total')) {
-                        $new_condition = str_replace("grand_total", "main_table.grand_total", $condition);
+                        $new_condition = str_replace("`grand_total`", "`main_table`.grand_total", $condition);
                         $where[$key] = $new_condition;
                     }
                     if (strpos($condition, 'base_grand_total')) {
-                        $new_condition = str_replace("base_grand_total", "main_table.base_grand_total", $condition);
+                        $new_condition = str_replace("`base_grand_total`", "`main_table`.base_grand_total", $condition);
                         $where[$key] = $new_condition;
                     }
                     if (strpos($condition, 'status')) {
-                        $new_condition = str_replace("status", "main_table.status", $condition);
+                        $new_condition = str_replace("`status`", "`main_table`.status", $condition);
                         $where[$key] = $new_condition;
                     }
                 }
